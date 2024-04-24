@@ -52,4 +52,12 @@ app.post('/' , async(req:Request, res:Response) => {
 
 app.listen(process.env.PORT || 7000, () => {
     console.log("Server is listening");
+    startAntiSleep();
 })
+
+function startAntiSleep(){
+    const url = "https://corsproxy-la3g.onrender.com/?url=www.google.com";
+    request(url+'', (err,response,body) => {
+        setTimeout(startAntiSleep, 1000*20);
+    })
+}
