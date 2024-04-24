@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "bun index.ts",
-    "build":"bun build index.ts --target node --outdir dist/",
+    "build":"bun install && bun build index.ts --target node --outdir dist/",
     "start": "bun dist/index.js"
   },
   "devDependencies": {
