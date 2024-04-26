@@ -15,8 +15,7 @@ app.get('/' , async(req:Request, res:Response) => {
         res.status(400).json({error:"No url provided"})
         return;
     }
-    console.log({url}, req.url, req.query);
-    
+    console.log("HITTING URL: ", url);
     const data = await new Promise((resolve, reject) => {
         request(url+'', {json:true}, (err,response,body) => {
             if(err){
@@ -36,6 +35,7 @@ app.get('/full' , async(req:Request, res:Response) => {
         res.status(400).json({error:"No url provided"})
         return;
     }
+    console.log("HITTING URL (FULL): ", url);
     const data = await new Promise((resolve, reject) => {
         request(url+'', {json:true}, (err,response,body) => {
             if(err){
