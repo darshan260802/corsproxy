@@ -79,6 +79,6 @@ app.listen(process.env.PORT || 7000, () => {
 function startAntiSleep(){
     const url = "https://corsproxy-la3g.onrender.com/?url=https://www.google.com";
     request(url+'', (err,response,body) => {
-        setTimeout(startAntiSleep, 1000*20);
+        setTimeout(startAntiSleep, 1000*20*60);
     })
 }
