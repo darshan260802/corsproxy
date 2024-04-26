@@ -15,6 +15,27 @@ app.get('/' , async(req:Request, res:Response) => {
         res.status(400).json({error:"No url provided"})
         return;
     }
+    console.log({url}, req.url, req.query);
+    
+    const data = await new Promise((resolve, reject) => {
+        request(url+'', {json:true}, (err,response,body) => {
+            if(err){
+                reject(err);
+                return;
+            }
+            resolve(body);
+        })
+    }).catch((err) => {
+        res.status(500).json({err});
+    })
+    res.status(200).json(data);
+})
+app.get('/full' , async(req:Request, res:Response) => {
+    const url = req.url.split('?url=').pop() ?? "";
+    if(!url) {
+        res.status(400).json({error:"No url provided"})
+        return;
+    }
     const data = await new Promise((resolve, reject) => {
         request(url+'', {json:true}, (err,response,body) => {
             if(err){
