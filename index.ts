@@ -56,6 +56,7 @@ app.post('/' , async(req:Request, res:Response) => {
         res.status(400).json({error:"No url provided"})
         return;
     }
+    console.log("HITTING POST : ", url, JSON.stringify(req.body));
     const data = await new Promise((resolve, reject) => {
         request(url+'', {json:true, body: req.body, method:'POST'}, (err,response,body) => {
             if(err){
@@ -70,6 +71,26 @@ app.post('/' , async(req:Request, res:Response) => {
     res.status(200).json(data);
 })
 
+app.post('/full' , async(req:Request, res:Response) => {
+    const url = req.url.split('?url=').pop() ?? "";;
+    if(!url) {
+        res.status(400).json({error:"No url provided"})
+        return;
+    }
+    console.log("HITTING FULL POST : ", url, JSON.stringify(req.body));
+    const data = await new Promise((resolve, reject) => {
+        request(url+'', {json:true, body: req.body, method:'POST'}, (err,response,body) => {
+            if(err){
+                reject(err);
+                return;
+            }
+            resolve(body);
+        })
+    }).catch((err) => {
+        res.status(500).json({err});
+    })
+    res.status(200).json(data);
+})
 
 app.listen(process.env.PORT || 7000, () => {
     console.log("Server is listening");
