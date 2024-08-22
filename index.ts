@@ -17,7 +17,7 @@ app.get('/' , async(req:Request, res:Response) => {
     }
     console.log("HITTING URL: ", url);
     const data = await new Promise((resolve, reject) => {
-        request(url+'', {json:true}, (err,response,body) => {
+        request(url+'', {json:true, strictSSL: false}, (err,response,body) => {
             if(err){
                 reject(err);
                 return;
@@ -37,7 +37,7 @@ app.get('/full' , async(req:Request, res:Response) => {
     }
     console.log("HITTING URL (FULL): ", url);
     const data = await new Promise((resolve, reject) => {
-        request(url+'', {json:true}, (err,response,body) => {
+        request(url+'', {json:true, strictSSL: false,}, (err,response,body) => {
             if(err){
                 reject(err);
                 return;
@@ -58,7 +58,7 @@ app.post('/' , async(req:Request, res:Response) => {
     }
     console.log("HITTING POST : ", url, JSON.stringify(req.body));
     const data = await new Promise((resolve, reject) => {
-        request(url+'', {json:true, body: req.body, method:'POST', headers : {"Content-Type": "application/json", ...req.headers}}, (err,response,body) => {
+        request(url+'', {json:true, strictSSL: false, body: req.body, method:'POST', headers : {"Content-Type": "application/json", ...req.headers}}, (err,response,body) => {
             if(err){
                 reject(err);
                 return;
@@ -79,7 +79,7 @@ app.post('/full' , async(req:Request, res:Response) => {
     }
     console.log("HITTING FULL POST : ", url, JSON.stringify(req.body));
     const data = await new Promise((resolve, reject) => {
-        request(url+'', {json:true, body: req.body, method:'POST', headers : {"Content-Type": "application/json", ...req.headers}}, (err,response,body) => {
+        request(url+'', {json:true, strictSSL: false, body: req.body, method:'POST', headers : {"Content-Type": "application/json", ...req.headers}}, (err,response,body) => {
             if(err){
                 reject(err);
                 return;
